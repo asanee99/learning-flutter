@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        brightness: Brightness.light,
+        brightness: Brightness.light  ,
         primarySwatch: Colors.grey,
         accentColor: Colors.deepPurple
       ),
@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('EasyList'),
         ),
-        body: ProductsManager('Food Tester'),
+        body: ProductsManager(),
       ),
     );
   }
 }
+
