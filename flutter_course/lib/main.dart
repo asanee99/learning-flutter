@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './products_manager.dart';
+import './pages/auth.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,15 +10,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         brightness: Brightness.light  ,
-        primarySwatch: Colors.grey,
-        accentColor: Colors.deepPurple
+        primarySwatch: Colors.deepOrange,
+        accentColor: Colors.deepOrange
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('EasyList'),
-        ),
-        body: ProductsManager(),
-      ),
+      home: AuthPage(),
     );
   }
 }

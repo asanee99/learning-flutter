@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ProductControl extends StatelessWidget {
-  
   final Function addProduct;
-  
+
   ProductControl(this.addProduct);
 
   @override
@@ -11,7 +10,9 @@ class ProductControl extends StatelessWidget {
     return RaisedButton(
       color: Theme.of(context).primaryColor,
       onPressed: () {
-          addProduct('Sweets');      
+        addProduct(
+          {'title': 'Chocolate', 'image': 'assets/food.jpg'},
+        );
       },
       child: Text('Add Product'),
     );

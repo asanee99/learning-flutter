@@ -3,7 +3,7 @@ import './products.dart';
 import './product_control.dart';
 
 class ProductsManager extends StatefulWidget {
-  final String startingProduct;
+  final Map<String, String> startingProduct;
 
   ProductsManager({this.startingProduct});
 
@@ -15,7 +15,7 @@ class ProductsManager extends StatefulWidget {
 }
 
 class _ProductManagerState extends State<ProductsManager> {
-  List<String> _products = [];
+  List<Map<String, String>> _products = [];
 
   @override
   void initState() {
@@ -31,9 +31,15 @@ class _ProductManagerState extends State<ProductsManager> {
     super.didUpdateWidget(oldWidget);
   }
 
-  void _addProduct(String product) {
+  void _addProduct(Map<String, String> product) {
     setState(() {
       _products.add(product);
+    });
+  }
+
+  void _deleteProduct(int index) {
+    setState(() {
+      _products.removeAt(index);
     });
   }
 
@@ -46,7 +52,7 @@ class _ProductManagerState extends State<ProductsManager> {
           margin: EdgeInsets.all(10.0),
           child: ProductControl(_addProduct),
         ),
-        Expanded(child: Products(_products))
+        Expanded(child: Products(_products, deleteProduct: _deleteProduct))
       ],
     );
   }
