@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 
 class ProductPage extends StatelessWidget {
   final String title;
+  final String description;
+  final double price;
   final String imageUrl;
 
-  ProductPage(this.title, this.imageUrl);
+  ProductPage(this.title, this.description, this.price, this.imageUrl);
 
   _showWarningDialog(BuildContext context) {
     showDialog(
@@ -46,33 +48,80 @@ class ProductPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(title),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(imageUrl),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: Text('Details!'),
-            ),
-            Container(
-              padding: EdgeInsets.all(10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Image.asset('assets/food.jpg'),
+              SizedBox(
+                height: 10.0,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Title :  ',
+                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+                    ),
+                    Text(
+                      '${this.title}',
+                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Description :  ',
+                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+                    ),
+                    Flexible(
+                      child: Text(
+                        '${this.description}',
+                        style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(bottom: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Price :  ',
+                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+                    ),
+                    Text(
+                      '${this.price} \$',
+                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+                    ),
+                  ],
+                ),
+              ),
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
                 children: <Widget>[
                   RaisedButton(
-                    color: Theme.of(context).accentColor,
                     child: Text('Back'),
+                    color: Theme.of(context).accentColor,
                     onPressed: () => Navigator.pop(context),
                   ),
                   RaisedButton(
-                    color: Colors.greenAccent,
                     child: Text('Delete'),
+                    color: Theme.of(context).primaryColor,
                     onPressed: () => _showWarningDialog(context),
                   )
                 ],
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
