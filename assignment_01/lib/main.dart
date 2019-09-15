@@ -7,14 +7,14 @@ class MyAssignment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.blueAccent
-      ),
+      theme: ThemeData(primaryColor: Colors.blueAccent),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('First Assignment')
+          title: Text('First Assignment'),
         ),
-        body: TextControl('Starting Text'),
+        body: Center(
+          child: TextControl('Starting Text'),
+        ),
       ),
     );
   }

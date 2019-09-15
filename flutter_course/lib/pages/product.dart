@@ -10,30 +10,53 @@ class ProductPage extends StatelessWidget {
 
   ProductPage(this.title, this.description, this.price, this.imageUrl);
 
-  _showWarningDialog(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Arw you sure to Delete This Item?'),
-            content: Text('This action cannot ne undone!'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('DISCARD'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+  Widget _buildProductInfoSection() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Title :  ',
+              style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+            ),
+            Text(
+              title,
+              style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Description :  ',
+              style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+            ),
+            Flexible(
+              child: Text(
+                description,
+                style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
               ),
-              FlatButton(
-                child: Text('CONTINUE'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pop(context, true);
-                },
-              ),
-            ],
-          );
-        });
+            ),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Price :  ',
+              style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+            ),
+            Text(
+              '\$ ${price.toString()} ',
+              style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
+            ),
+          ],
+        )
+      ],
+    );
   }
 
   @override
@@ -55,56 +78,7 @@ class ProductPage extends StatelessWidget {
               SizedBox(
                 height: 10.0,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Title :  ',
-                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
-                    ),
-                    Text(
-                      '${this.title}',
-                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(bottom: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Description :  ',
-                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
-                    ),
-                    Flexible(
-                      child: Text(
-                        '${this.description}',
-                        style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(bottom: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Price :  ',
-                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
-                    ),
-                    Text(
-                      '${this.price} \$',
-                      style: TextStyle(fontFamily: 'Oswald', fontSize: 20.0),
-                    ),
-                  ],
-                ),
-              ),
+              _buildProductInfoSection(),
               ButtonBar(
                 alignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -116,7 +90,7 @@ class ProductPage extends StatelessWidget {
                   RaisedButton(
                     child: Text('Delete'),
                     color: Theme.of(context).primaryColor,
-                    onPressed: () => _showWarningDialog(context),
+                    onPressed: () => {},
                   )
                 ],
               )

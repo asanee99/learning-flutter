@@ -14,6 +14,74 @@ class _AuthPageState extends State<AuthPage> {
 
   FocusNode _passwordNode = FocusNode();
 
+  DecorationImage _buildBackgroundImage() {
+    return DecorationImage(
+        image: AssetImage('assets/background.jpg'),
+        fit: BoxFit.cover,
+        colorFilter:
+            ColorFilter.mode(Colors.black.withOpacity(0.4), BlendMode.dstATop));
+  }
+
+  Widget _buildEmailInputField() {
+    return TextField(
+      keyboardType: TextInputType.emailAddress,
+      autofocus: true,
+      decoration: InputDecoration(
+          labelText: 'Username', filled: true, fillColor: Colors.white),
+      onChanged: (String value) {
+        setState(() {
+          _usernameValue = value;
+        });
+      },
+      onEditingComplete: () {
+        FocusScope.of(context).requestFocus(_passwordNode);
+      },
+    );
+  }
+
+  Widget _buildPasswordInputField() {
+    return TextField(
+      autocorrect: false,
+      focusNode: _passwordNode,
+      decoration: InputDecoration(
+          labelText: 'Password', filled: true, fillColor: Colors.white),
+      obscureText: true,
+      onChanged: (String value) {
+        setState(() {
+          _passwordValue = value;
+        });
+      },
+    );
+  }
+
+  Widget _buildTemrsSwitch() {
+    return SwitchListTile(
+      value: _acceptTerms = false,
+      onChanged: (bool value) {
+        setState(() {
+          _acceptTerms = value;
+        });
+      },
+      title: Text('Accept Terms'),
+    );
+  }
+
+  Widget _buildLoginButtonWithSummited() {
+    return RaisedButton(
+      child: Text(
+        'Login',
+        style: TextStyle(color: Colors.white),
+      ),
+      color: Theme.of(context).primaryColor,
+      onPressed: () {
+        print(_usernameValue);
+        print(_passwordValue);
+        print(_acceptTerms);
+        Navigator.pushReplacementNamed(context, '/admin');
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,62 +90,22 @@ class _AuthPageState extends State<AuthPage> {
       ),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/background.jpg'),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.4), BlendMode.dstATop)),
+          image: _buildBackgroundImage(),
         ),
         padding: EdgeInsets.all(10.0),
         child: Center(
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                      labelText: 'Username',
-                      filled: true,
-                      fillColor: Colors.white),
-                  onChanged: (String value) {
-                    setState(() {
-                      _usernameValue = value;
-                    });
-                  },
-                  onEditingComplete: () {
-                    FocusScope.of(context).requestFocus(_passwordNode);
-                  },
-                ),
+                _buildEmailInputField(),
                 SizedBox(
                   height: 10.0,
                 ),
-                TextField(
-                  autocorrect: false,
-                  focusNode: _passwordNode,
-                  decoration: InputDecoration(
-                      labelText: 'Password',
-                      filled: true,
-                      fillColor: Colors.white),
-                  obscureText: true,
-                  onChanged: (String value) {
-                    setState(() {
-                      _passwordValue = value;
-                    });
-                  },
-                ),
+                _buildPasswordInputField(),
                 SizedBox(
                   height: 10.0,
                 ),
-                SwitchListTile(
-                  value: _acceptTerms = false,
-                  onChanged: (bool value) {
-                    setState(() {
-                      _acceptTerms = value;
-                    });
-                  },
-                  title: Text('Accept Terms'),
-                ),
+                _buildTemrsSwitch(),
                 SizedBox(
                   height: 10.0,
                 ),
@@ -87,19 +115,7 @@ class _AuthPageState extends State<AuthPage> {
                 SizedBox(
                   height: 10.0,
                 ),
-                RaisedButton(
-                  child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    print(_usernameValue);
-                    print(_passwordValue);
-                    print(_acceptTerms);
-                    Navigator.pushReplacementNamed(context, '/admin');
-                  },
-                ),
+                _buildLoginButtonWithSummited(),
                 RaisedButton(
                   child: Text('Forgot Password'),
                   color: Theme.of(context).accentColor,
