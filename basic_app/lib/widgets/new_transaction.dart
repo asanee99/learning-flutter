@@ -1,14 +1,17 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 
-class NewTransactions extends StatelessWidget {
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
+class NewTransaction extends StatefulWidget {
   final Function addNewTx;
 
-  NewTransactions(this.addNewTx);
+  NewTransaction(this.addNewTx);
+
+  @override
+  _NewTransactionState createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   void submitData() {
     final enteredTitle = titleController.text;
@@ -19,10 +22,11 @@ class NewTransactions extends StatelessWidget {
     }
     /* print(titleInput);
      print(amountInput); */
-    addNewTx(
+    widget.addNewTx(
       enteredTitle,
       enteredAmount,
     );
+    Navigator.of(context).pop();
     print(enteredTitle);
     print(enteredAmount);
   }
@@ -40,7 +44,8 @@ class NewTransactions extends StatelessWidget {
               TextField(
                 decoration: InputDecoration(labelText: 'Title'),
                 controller: titleController,
-                // onSubmitted: (_) => submitData, // use when u want to save data whn u summited
+                onSubmitted: (_) =>
+                    submitData(), // use when u want to save data whn u summited
                 // onChanged: (val) => titleInput = val,
               ),
               TextField(
@@ -48,7 +53,7 @@ class NewTransactions extends StatelessWidget {
                 controller: amountController,
                 // onChanged: (val) => amountInput = val,
                 keyboardType: TextInputType.number,
-                // onSubmitted: (_) => submitData,
+                onSubmitted: (_) => submitData(),
               ),
               FlatButton(
                 child: Text('Add Transactions'),
