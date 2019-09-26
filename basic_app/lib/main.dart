@@ -15,12 +15,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
-              title: TextStyle(
-                fontFamily: 'OpenSans',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            title: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
+            button: TextStyle(
+              color: Colors.white,
+            )),
         appBarTheme: AppBarTheme(
             textTheme: ThemeData.light().textTheme.copyWith(
                   title: TextStyle(
@@ -57,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
       date: DateTime.now(),
     ), */
   ];
-  
+
   List<Transaction> get _recentTransaction {
     return _userTransactions.where((tx) {
       return tx.date.isAfter(
@@ -68,16 +70,22 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmonut) {
+  void _addNewTransaction(String txTitle, double txAmonut, DateTime txDate) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmonut,
-      date: DateTime.now(),
+      date: txDate,
       id: DateTime.now().toString(),
     );
 
     setState(() {
       _userTransactions.add(newTx);
+    });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id == id);
     });
   }
 
@@ -112,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(_recentTransaction),
-            TransactionsList(_userTransactions)
+            TransactionsList(_userTransactions, _deleteTransaction)
           ],
         ),
       ),
