@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "739129034881",
+    "firebase_url": "https://chat-app-f570b.firebaseio.com",
+    "project_id": "chat-app-f570b",
+    "storage_bucket": "chat-app-f570b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739129034881:android:57541bd0bbd747ea2e6580",
+        "android_client_info": {
+          "package_name": "com.example.pt_chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739129034881-fs30g97f7n1a7dsnrjjt9i8s15p72p6s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAH5vlItP4gzsMQGtv5islFcs38zkQmMWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739129034881-fs30g97f7n1a7dsnrjjt9i8s15p72p6s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
